@@ -21,6 +21,9 @@ main {
   height: 98px;
   border: 1px solid black;
   float:left;
+  font-size:60px;
+  line-height: 98px;
+  text-align:center;
 }
 .label {
   padding: 10px;
