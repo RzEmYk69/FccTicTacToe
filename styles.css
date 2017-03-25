@@ -1,0 +1,35 @@
+* {
+  margin:0;
+  padding: 0;
+  border-sizing: border-box;
+  color: black;
+  background-color:grey;
+}
+
+main {
+  width: 300px;
+  margin: auto;
+
+}
+.board {
+  margin: 20px 0px;
+  height: 300px;
+}
+.field {
+  background-color:silver;
+  width: 98px;
+  height: 98px;
+  border: 1px solid black;
+  float:left;
+}
+.label {
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}
+button {
+  width:45%;
+  margin-left:3%;
+  font-size:30px;
+  background-color:silver;
+}
