@@ -35,6 +35,7 @@ oBtn.addEventListener("click", function(){
   buttons.style.display = 'none';
   label.innerHTML = "Click on a field";
   gameStatus=true;
+  AImove();
 },false);
 
 function AImove() {
@@ -44,10 +45,11 @@ function AImove() {
       possibleMoves.push(board[i]);
   }
   var howManyPossibleMoves = possibleMoves.length;
-  var AIchooses = (Math.floor(Math.random()*(howManyPossibleMoves+1)));
-  for (var i=0; i<board.length;i++) {
-    if (possibleMoves[AIchooses]===board[i]) {
-      var AIfield = "field"+(i+1);
+  var AIchooses = (Math.floor(Math.random()*(howManyPossibleMoves)));
+  for (var j=0; j<board.length;j++) {
+    if (possibleMoves[AIchooses]===board[j]) {
+      var AIfield = "field"+(j+1);
+      console.log("AI:",AIfield);
       move(AIfield,AIplayer);
     }
 
@@ -87,17 +89,32 @@ function move(field,mark) {
   }
 }
 
+function checkWin(p) {
+  if (board[0]===p && board[1]===p && board[2]===p) return false;
+  if (board[3]===p && board[4]===p && board[5]===p) return false;
+  if (board[6]===p && board[7]===p && board[8]===p) return false;
+  if (board[0]===p && board[3]===p && board[6]===p) return false;
+  if (board[1]===p && board[4]===p && board[7]===p) return false;
+  if (board[2]===p && board[5]===p && board[8]===p) return false;
+  if (board[0]===p && board[4]===p && board[8]===p) return false;
+  if (board[2]===p && board[4]===p && board[6]===p) return false;
+  return true;
+}
 
 fields.addEventListener("click", function(a) {
     var field = a.target.id;
 
     if (gameStatus===true) {
       move(field,player);
-      AImove();
+      gameStatus = checkWin(player);
+      if (gameStatus===false) label.innerHTML = "Human player wins!";
     }
+    if (gameStatus===true) {
+      AImove();
+      gameStatus = checkWin(AIplayer);
+      if (gameStatus===false) label.innerHTML = "AI player wins!";
 
-  console.log(board);
-
+    }
 
 },false);
 
