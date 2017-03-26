@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 var label = document.getElementById("label");
+var xBtn = document.getElementById("xBtn");
 var oBtn = document.getElementById("oBtn");
 var buttons = document.getElementById("buttons");
 var fields = document.getElementById("board");
@@ -49,7 +50,7 @@ function AImove() {
   for (var j=0; j<board.length;j++) {
     if (possibleMoves[AIchooses]===board[j]) {
       var AIfield = "field"+(j+1);
-      console.log("AI:",AIfield);
+      //console.log("AI:",AIfield);
       move(AIfield,AIplayer);
     }
 
@@ -59,33 +60,32 @@ function AImove() {
 function move(field,mark) {
   switch(field) {
   case "field1":  field1.innerHTML = mark;
-                  if(board[0] !=="X" || board[0] !=="O") board[0] = mark;
+                  board[0] = mark;
                   break;
   case "field2":  field2.innerHTML = mark;
-                  if(board[1] !=="X" || board[1] !=="O") board[1] = mark;
+                  board[1] = mark;
                   break;
   case "field3":  field3.innerHTML = mark;
-                  if(board[2] !=="X" || board[2] !=="O") board[2] = mark;
+                  board[2] = mark;
                   break;
   case "field4":  field4.innerHTML = mark;
-                  if(board[3] !=="X" || board[3] !=="O") board[3] = mark;
+                  board[3] = mark;
                   break;
   case "field5":  field5.innerHTML = mark;
-                  if(board[4] !=="X" || board[4] !=="O")board[4] = mark;
+                  board[4] = mark;
                   break;
   case "field6":  field6.innerHTML = mark;
-                  if(board[5] !=="X" || board[5] !=="O")board[5] = mark;
+                  board[5] = mark;
                   break;
   case "field7":  field7.innerHTML = mark;
-                  if(board[6] !=="X" || board[6] !=="O")board[6] = mark;
+                  board[6] = mark;
                   break;
   case "field8":  field8.innerHTML = mark;
-                  if(board[7] !=="X" || board[7] !=="O")board[7] = mark;
+                  board[7] = mark;
                   break;
   case "field9":  field9.innerHTML = mark;
-                  if(board[8] !=="X" || board[8] !=="O")board[8] = mark;
+                  board[8] = mark;
                   break;
-
   }
 }
 
@@ -101,19 +101,48 @@ function checkWin(p) {
   return true;
 }
 
+function checkField(field) {
+  switch(field) {
+  case "field1":  if (board[0] !== "X" && board[0] !== "O") return true;
+                  break;
+  case "field2":  if (board[1] !== "X" && board[1] !== "O") return true;
+                  break;
+  case "field3":  if (board[2] !== "X" && board[2] !== "O") return true;
+                  break;
+  case "field4":  if (board[3] !== "X" && board[3] !== "O") return true;
+                  break;
+  case "field5":  if (board[4] !== "X" && board[4] !== "O") return true;
+                  break;
+  case "field6":  if (board[5] !== "X" && board[5] !== "O") return true;
+                  break;
+  case "field7":  if (board[6] !== "X" && board[6] !== "O") return true;
+                  break;
+  case "field8":  if (board[7] !== "X" && board[7] !== "O") return true;
+                  break;
+  case "field9":  if (board[8] !== "X" && board[8] !== "O") return true;
+                  break;
+  }
+
+  return false;
+}
+
 fields.addEventListener("click", function(a) {
     var field = a.target.id;
 
-    if (gameStatus===true) {
+    var emptyFiled = false;
+    emptyField = checkField(field);
+    //console.log(emptyField,field);
+
+    if (gameStatus===true && emptyField===true) {
       move(field,player);
       gameStatus = checkWin(player);
       if (gameStatus===false) label.innerHTML = "Human player wins!";
     }
-    if (gameStatus===true) {
+    if (gameStatus===true && emptyField===true) {
       AImove();
       gameStatus = checkWin(AIplayer);
-      if (gameStatus===false) label.innerHTML = "AI player wins!";
-
+    if (gameStatus===false) label.innerHTML = "AI player wins!";
+    //emptyField=false;
     }
 
 },false);
