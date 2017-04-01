@@ -2,8 +2,9 @@
   margin:0;
   padding: 0;
   border-sizing: border-box;
-  color: black;
-  background-color:grey;
+  color: #121254;
+  background-color:white;
+  font-family: 'Indie Flower', cursive;
 }
 
 main {
@@ -16,27 +17,72 @@ main {
   height: 300px;
 }
 .field {
-  background-color:silver;
+  background-color:white;
   width: 98px;
   height: 98px;
-  border: 1px solid black;
+  border: 1px solid #6d6ddf;
   float:left;
-  font-size:60px;
+  font-size:98px;
   line-height: 98px;
   text-align:center;
 }
+
+#field1 {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+}
+#field2 {
+  border-top: 1px solid white;
+}
+#field3 {
+  border-top: 1px solid white;
+  border-right: 1px solid white;
+}
+#field4 {
+  border-left: 1px solid white;
+}
+#field6 {
+  border-right: 1px solid white;
+}
+#field7 {
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+}
+#field8 {
+  border-bottom: 1px solid white;
+}
+#field9 {
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+
 .label {
   padding: 10px;
-  font-size: 30px;
+  font-size: 32px;
   text-align: center;
+  margin-bottom:15px;
 }
 button {
+  background-color: white;
+  border: 2px dashed #6d6ddf;                 //#121254;
+  border-radius: 30px;
+  color: #121254;
+  padding:5px;
+  text-align:center;
+  text-decoration:none;
   width:45%;
   margin-left:3%;
   font-size:30px;
-  background-color:silver;
 }
-
+button:hover {
+  border-color: #121254; //6d6ddf;
+}
 #resetBtn {
   width:94%;
+}
+footer {
+  text-align: center;
+  font-size: 15px;
+  padding:20px 10px 0px 10px;
 }
