@@ -101,6 +101,19 @@ function checkWin(p) {
   return true;
 }
 
+function checkTie() {
+  var howManyEmptyFields=0;
+  for (var i=0; i<board.length; i++) {
+    if (board[i]!=="X" & board[i]!=="O") howManyEmptyFields++;
+  }
+  if (howManyEmptyFields===0) {
+    label.innerHTML = "No one wins.Tie!";
+    return false;
+  }
+  howManyEmptyFields=0;
+  return true;
+}
+
 function checkField(field) {
   switch(field) {
   case "field1":  if (board[0] !== "X" && board[0] !== "O") return true;
@@ -137,11 +150,13 @@ fields.addEventListener("click", function(a) {
       move(field,player);
       gameStatus = checkWin(player);
       if (gameStatus===false) label.innerHTML = "Human player wins!";
+      checkTie();
     }
     if (gameStatus===true && emptyField===true) {
       AImove();
       gameStatus = checkWin(AIplayer);
     if (gameStatus===false) label.innerHTML = "AI player wins!";
+    checkTie();
     //emptyField=false;
     }
 
