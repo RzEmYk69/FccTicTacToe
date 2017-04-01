@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 var label = document.getElementById("label");
 var xBtn = document.getElementById("xBtn");
 var oBtn = document.getElementById("oBtn");
+var resetBtn = document.getElementById("resetBtn");
 var buttons = document.getElementById("buttons");
 var fields = document.getElementById("board");
 var field1 = document.getElementById("field1");
@@ -21,6 +22,7 @@ var board = [1,2,3,4,5,6,7,8,9];
 var gameStatus = false;
 
 label.innerHTML = "Choose X or O";
+resetBtn.style.display = 'none';
 
 xBtn.addEventListener("click", function(){
   player = "X";
@@ -108,6 +110,7 @@ function checkTie() {
   }
   if (howManyEmptyFields===0) {
     label.innerHTML = "No one wins.Tie!";
+    showResetBtn();
     return false;
   }
   howManyEmptyFields=0;
@@ -139,6 +142,13 @@ function checkField(field) {
   return false;
 }
 
+function showResetBtn() {
+  buttons.style.display = 'unset';
+  xBtn.style.display = "none";
+  oBtn.style.display = 'none';
+  resetBtn.style.display = 'unset';
+}
+
 fields.addEventListener("click", function(a) {
     var field = a.target.id;
 
@@ -149,17 +159,41 @@ fields.addEventListener("click", function(a) {
     if (gameStatus===true && emptyField===true) {
       move(field,player);
       gameStatus = checkWin(player);
-      if (gameStatus===false) label.innerHTML = "Human player wins!";
-      checkTie();
+      if (gameStatus===false) {
+        label.innerHTML = "Human player wins!";
+        showResetBtn();
+        }
+      if (gameStatus===true) checkTie();
     }
     if (gameStatus===true && emptyField===true) {
       AImove();
       gameStatus = checkWin(AIplayer);
-    if (gameStatus===false) label.innerHTML = "AI player wins!";
-    checkTie();
+    if (gameStatus===false) {
+      label.innerHTML = "AI player wins!";
+      showResetBtn();
+    }
+    if (gameStatus===true) checkTie();
     //emptyField=false;
     }
 
+},false);
+
+resetBtn.addEventListener("click", function() {
+
+  label.innerHTML = "Choose X or O";
+  resetBtn.style.display = 'none';
+  xBtn.style.display = "unset";
+  oBtn.style.display = 'unset';
+  field1.innerHTML="";
+  field2.innerHTML="";
+  field3.innerHTML="";
+  field4.innerHTML="";
+  field5.innerHTML="";
+  field6.innerHTML="";
+  field7.innerHTML="";
+  field8.innerHTML="";
+  field9.innerHTML="";
+  board = [1,2,3,4,5,6,7,8,9];
 },false);
 
 
